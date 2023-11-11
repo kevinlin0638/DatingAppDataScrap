@@ -53,13 +53,13 @@ async def run_update_manually(url):
         context = await browser.new_context()
 
         page = await context.new_page()
-        result = await process_profile(page, url)
+        result = await process_profile(page, url, False)
         print(result.items())
 
         await page.close()
         await browser.close()
 
 if __name__ == '__main__':
-    # asyncio.run(update_missing_usernames('spam_output_female.csv'), False)
+    asyncio.run(update_missing_usernames('spam_output_female.csv'), False)
     asyncio.run(update_missing_usernames('spam_output_male.csv', True))
-    # asyncio.run(run_update_manually('https://scamdigger.com/2019/01/sherri-vlastuin-cfus007gmail-com/'))
+    # asyncio.run(run_update_manually('https://scamdigger.com/2012/08/jeremy-klarkson-jeremyklarksonyahoo-com/'))

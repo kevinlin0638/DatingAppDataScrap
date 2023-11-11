@@ -16,10 +16,21 @@ async def process_profile(page, url, is_male):
         if img_url_element:
             profile_data['img_url'] = await img_url_element.get_attribute("src")
 
-        profile_details_element = await page.query_selector("div.entry-content > p")
-        if profile_details_element:
-            profile_details_text = await profile_details_element.text_content()
-            profile_data.update(extract_profile_details(profile_details_text))
+        profile_details_text = await page.eval_on_selector(
+            "div.entry-content > p",
+            "p => { \
+                let textContent = ''; \
+                let node = p; \
+                while(node && !node.querySelector('hr')) { \
+                    if(!node.classList.contains('wrapper')) { \
+                        textContent += node.textContent + '\\n'; \
+                    } \
+                    node = node.nextElementSibling; \
+                } \
+                return textContent.trim(); \
+            }"
+        )
+        profile_data.update(extract_profile_details(profile_details_text))
     except Exception as e:
         return {}
 
@@ -29,24 +40,28 @@ def extract_profile_details(text):
     details = {}
     # Define regular expressions for each piece of data
     regex_mappings = {
-        'username': re.compile(r'username\s*:\s*(.+)', re.IGNORECASE),
-        'email': re.compile(r'email\s*:\s*(.+)', re.IGNORECASE),
-        'name': re.compile(r'name\s*:\s*(.+)', re.IGNORECASE),
-        'age': re.compile(r'age\s*:\s*(\d+)', re.IGNORECASE),
-        'location': re.compile(r'location\s*:\s*(.+)', re.IGNORECASE),
-        'marital_status': re.compile(r'marital status\s*:\s*(.+)', re.IGNORECASE),
-        'children': re.compile(r'children\s*:\s*(.+)', re.IGNORECASE),
-        'sexual_orientation': re.compile(r'sexual orientation\s*:\s*(.+)', re.IGNORECASE),
-        'ethnicity': re.compile(r'ethnicity\s*:\s*(.+)', re.IGNORECASE),
-        'religion': re.compile(r'religion\s*:\s*(.+)', re.IGNORECASE),
-        'occupation': re.compile(r'occupation\s*:\s*(.+)', re.IGNORECASE),
-        'description': re.compile(r'description\s*:\s*(.+)', re.DOTALL | re.IGNORECASE)
+        'username': re.compile(r'username\s*:?\s*(.+)', re.IGNORECASE),
+        'email': re.compile(r'email\s*:?\s*(.+)', re.IGNORECASE),
+        'name': re.compile(r'name\s*:?\s*(.+)', re.IGNORECASE),
+        'age': re.compile(r'age\s*:?\s*(\d+)', re.IGNORECASE),
+        'location': re.compile(r'location\s*:?\s*(.+)', re.IGNORECASE),
+        'looking_for': re.compile(r'Looking for\s*:?\s*(.+)', re.IGNORECASE),
+        'here_for': re.compile(r'Here for\s*:?\s*(.+)', re.IGNORECASE),
+        'match_age': re.compile(r'My match’s age\s*:?\s*(.+)', re.IGNORECASE),
+        'marital_status': re.compile(r'marital status\s*:?\s*(.+)', re.IGNORECASE),
+        'children': re.compile(r'children\s*:?\s*(.+)', re.IGNORECASE),
+        'sexual_orientation': re.compile(r'sexual orientation\s*:?\s*(.+)', re.IGNORECASE),
+        'ethnicity': re.compile(r'ethnicity\s*:?\s*(.+)', re.IGNORECASE),
+        'religion': re.compile(r'religion\s*:?\s*(.+)', re.IGNORECASE),
+        'occupation': re.compile(r'occupation\s*:?\s*(.+)', re.IGNORECASE)
     }
 
     for key, regex in regex_mappings.items():
         match = regex.search(text)
         if match:
-            details[key] = match.group(1).strip()
+            res = match.group(1).strip()
+            if res != '–':
+                details[key] = res
 
     return details
 
@@ -87,7 +102,6 @@ async def save_to_csv(data, filename):
             'ethnicity',
             'religion',
             'occupation',
-            'description',
             'here_for',
             'last_activity',
             'smoke',
