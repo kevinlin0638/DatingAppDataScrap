@@ -20,10 +20,10 @@ pagerank_scores = nx.pagerank(graph)
 pagerank_df = pd.DataFrame(list(pagerank_scores.items()), columns=['User', 'PageRank Score']).sort_values(by='PageRank Score', ascending=False)
 
 print(pagerank_df.head())  # Display the top users by PageRank score
-
+pagerank_df.to_csv('pagerank.csv', index=False)
 
 # Calculate Betweenness Centrality for the users
-betweenness_centrality = nx.betweenness_centrality(graph, k=5000)
+betweenness_centrality = nx.betweenness_centrality(graph)
 
 # Convert the Betweenness Centrality scores to a dataframe
 betweenness_df = pd.DataFrame(list(betweenness_centrality.items()), columns=['User', 'Betweenness Centrality']).sort_values(by='Betweenness Centrality', ascending=False)
@@ -41,6 +41,7 @@ top_betweenness = betweenness_df.head()
 num_communities = len(set(communities.values()))
 print(top_betweenness)
 print(num_communities)
+betweenness_df.to_csv('top_betweenness.csv', index=False)
 
 
 # ----------------------------------------------------------------
