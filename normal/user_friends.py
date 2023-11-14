@@ -13,7 +13,7 @@ async def extract_user_data(url, playwright):
         await page.goto(url, timeout=600000)
 
         # Query all elements that contain friend information
-        friend_elements = await page.query_selector_all('.ow_avatar a')
+        friend_elements = await page.query_selector_all('.ow_lp_avatars .ow_lp_avatars .ow_avatar a')
 
         # Extract friends' URLs and usernames
         for friend_element in friend_elements:
