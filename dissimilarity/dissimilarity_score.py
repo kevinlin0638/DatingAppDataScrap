@@ -49,7 +49,7 @@ all_profile.to_csv('all_profile.csv')
 # Separate the scammer and normal profiles
 scammer_profiles = all_profile[all_profile['scam'] == 1]
 normal_profiles = all_profile[all_profile['scam'] == 0]
-'''
+
 # Initialize a dictionary to store Pearson Correlation Coefficients (PCC) results
 pcc_results = {}
 
@@ -71,5 +71,3 @@ pcc_results_json = json.dumps({str(key): value for key, value in pcc_results.ite
 # Save the PCC results to a JSON file
 with open('pcc_results.json', 'w') as file:
     file.write(pcc_results_json)
-
-'''
