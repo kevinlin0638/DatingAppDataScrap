@@ -28,4 +28,4 @@ trusted_profile.to_csv('trusted_profile.csv', index=False)
 trusted_profiles_info = all_profile.loc[trusted_profile['normal_profile_index'].astype(int)]
 
 # Export the detailed trusted profile information to a CSV file
-trusted_profiles_info.to_csv('trusted_profiles_info.csv', index=False)
+trusted_profiles_info.to_csv('trusted_profiles_info.csv')
