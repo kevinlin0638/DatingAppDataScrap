@@ -16,7 +16,7 @@ normal_indices = [index for scores in loaded_pcc_results.values() for index, _ i
 index_counts = Counter(normal_indices)
 
 # Identify indices that are flagged more than twice as similar to scammer profiles
-trusted_indices = [index for index, count in index_counts.items() if count > 2]
+trusted_indices = [index for index, count in index_counts.items() if count > 9]
 
 # Create a DataFrame with the indices of trusted normal profiles
 trusted_profile = pd.DataFrame(trusted_indices, columns=['normal_profile_index'])

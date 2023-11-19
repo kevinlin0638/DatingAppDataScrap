@@ -19,6 +19,7 @@ scam_meta = ['email']
 # Load and preprocess the profile data
 all_profile = pd.read_csv('processed_data.csv')
 all_profile = all_profile.dropna(subset=['description'])
+all_profile = all_profile.dropna(subset=['username'])
 all_profile['tokenized'] = all_profile['description'].progress_apply(word_tokenize)
 
 # Define a function to pad sequences to a maximum length
