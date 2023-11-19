@@ -67,3 +67,24 @@ for community in top_5_communities:
 # for community, users in top_communities_users.items():
 #     print(f"\nUsers in Community {community}:")
 #     print(users)
+
+# Assuming 'pagerank_scores' and 'communities' are already computed as in your current code
+
+# Convert the PageRank scores to a DataFrame
+pagerank_df = pd.DataFrame.from_dict(pagerank_scores, orient='index', columns=['PageRank Score'])
+
+# Add community information to the PageRank DataFrame
+pagerank_df['Community'] = pagerank_df.index.map(communities)
+
+# Calculate sum and average PageRank for each community
+community_pagerank = pagerank_df.groupby('Community')['PageRank Score'].agg(['sum', 'mean'])
+
+# Merge this information with the community_counts DataFrame
+community_info = pd.concat([community_counts.rename('Size'), community_pagerank], axis=1)
+
+# Print the extended community information
+print("Extended Community Information:")
+print(community_info)
+
+# Optionally, you can save this to a CSV file
+community_info.to_csv('community_info.csv', index=True)
