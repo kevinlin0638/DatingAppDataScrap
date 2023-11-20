@@ -2,7 +2,7 @@ import asyncio
 import pandas as pd
 from playwright.async_api import async_playwright
 
-from spam.spam_digger import process_profile
+from scrap.spam.spam_digger import process_profile
 
 
 async def process_profiles_concurrently(context, urls, is_male):

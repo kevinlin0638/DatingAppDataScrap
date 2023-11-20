@@ -46,7 +46,7 @@ tqdm.pandas()
 nltk.download('stopwords')
 nltk.download('punkt')
 
-all_profile = pd.read_csv("./processed_data/processed_data.csv")
+all_profile = pd.read_csv("../../data/processed_data.csv")
 
 """# 2 Market Basket for Attributes"""
 

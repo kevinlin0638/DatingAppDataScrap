@@ -9,16 +9,16 @@ with open('pcc_results.json', 'r') as file:
 # Load the all_profile DataFrame from the saved CSV file
 all_profile = pd.read_csv('all_profile.csv', index_col=0)
 
-# Extract normal profile indices from the loaded PCC results
+# Extract freq_item_set profile indices from the loaded PCC results
 normal_indices = [index for scores in loaded_pcc_results.values() for index, _ in scores]
 
-# Count how often each normal profile index occurs
+# Count how often each freq_item_set profile index occurs
 index_counts = Counter(normal_indices)
 
 # Identify indices that are flagged more than twice as similar to scammer profiles
 trusted_indices = [index for index, count in index_counts.items() if count > 2]
 
-# Create a DataFrame with the indices of trusted normal profiles
+# Create a DataFrame with the indices of trusted freq_item_set profiles
 trusted_profile = pd.DataFrame(trusted_indices, columns=['normal_profile_index'])
 
 # Save the indices of trusted profiles to a CSV for future reference

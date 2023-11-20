@@ -47,7 +47,7 @@ tqdm.pandas()
 nltk.download('stopwords')
 nltk.download('punkt')
 
-all_profile = pd.read_csv("./processed_data/processed_data.csv")
+all_profile = pd.read_csv("../data/processed_data.csv")
 
 """# EDA"""
 
@@ -83,7 +83,7 @@ for col in col_interest:
 
 all_profile.info()
 
-# Separate the sets for scam and normal
+# Separate the sets for scam and freq_item_set
 scam_sets = all_profile[all_profile['scam'] == 1]['description_stem_set'].dropna()
 normal_sets = all_profile[all_profile['scam'] == 0]['description_stem_set'].dropna()
 

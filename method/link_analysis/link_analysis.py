@@ -4,7 +4,7 @@ import pandas as pd
 import community as community_louvain
 
 # Load the data from the CSV file
-file_path = './normal/user_friends.csv'
+file_path = 'user_friends.csv'
 user_friends_data = pd.read_csv(file_path)
 
 # Display the first few rows of the dataframe to understand its structure

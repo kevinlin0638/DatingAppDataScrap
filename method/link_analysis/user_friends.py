@@ -78,7 +78,7 @@ async def update_csv(input_filename, output_filename, playwright):
 
 
 async def main():
-    input_filename = 'output.csv'  # Your existing CSV file
+    input_filename = '../../scrap/normal/output.csv'  # Your existing CSV file
     output_filename = 'user_friends.csv'  # New CSV file with additional data
     async with async_playwright() as playwright:
         browser = await playwright.chromium.launch(headless=True)

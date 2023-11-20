@@ -46,14 +46,14 @@ all_profile['vectors'] = all_profile['padded'].apply(tokens_to_vectors, model=w2
 # Save the all_profile DataFrame to a CSV file
 all_profile.to_csv('all_profile.csv')
 
-# Separate the scammer and normal profiles
+# Separate the scammer and freq_item_set profiles
 scammer_profiles = all_profile[all_profile['scam'] == 1]
 normal_profiles = all_profile[all_profile['scam'] == 0]
 
 # Initialize a dictionary to store Pearson Correlation Coefficients (PCC) results
 pcc_results = {}
 
-# Compare scammer profiles against normal profiles to find similarities
+# Compare scammer profiles against freq_item_set profiles to find similarities
 for scam_index, scam_row in scammer_profiles.iterrows():
     scammer_vector = scam_row['vectors']
     scores = []

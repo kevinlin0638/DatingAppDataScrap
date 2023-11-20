@@ -46,9 +46,9 @@ tqdm.pandas()
 
 """# 1. Clean-up"""
 
-normal_profile = pd.read_csv('./normal/data.csv')
-scam_profile1 = pd.read_csv('./spam/spam_output_female.csv')
-scam_profile2 = pd.read_csv('./spam/spam_output_male.csv')
+normal_profile = pd.read_csv('../scrap/normal/data.csv')
+scam_profile1 = pd.read_csv('../scrap/spam/spam_output_female.csv')
+scam_profile2 = pd.read_csv('../scrap/spam/spam_output_male.csv')
 scam_profile = pd.concat([scam_profile1, scam_profile2])
 
 # fix the scam description
