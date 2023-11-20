@@ -1,67 +1,45 @@
-# User Profile Analysis Toolkit
+# Dating Platform User Profile Analysis
 
-This collection of scripts is designed to analyze user profiles and calculate dissimilarity scores, 
-identify trusted profiles, and differentiate between naive and expert user sets based on profile characteristics.
+This repository contains a collection of scripts for data collection, cleaning, analysis, and trust score computation of user profiles from a dating platform. The project aims to identify patterns, assess profile authenticity, and derive meaningful insights from the data.
 
 ## Overview
 
-The toolkit comprises three main scripts, which should be executed in the following order:
+The project consists of several key components:
 
-1. `dissimilarity_score.py` - Calculates the dissimilarity scores between user profiles.
-2. `trusted_profile.py` - Identifies and extracts profiles that can be considered trusted based on the dissimilarity scores.
-3. `naive&expert.py` - Segregates the profiles into naive and expert sets based on predefined criteria.
+1. **Data Collection:**
+   - Scripts to scrape user data from a dating website, extracting basic and detailed user profile information.
+   - Asynchronous web scraping techniques are used for efficient data collection.
+
+2. **Data Cleaning and Preprocessing:**
+   - Standardizing fields, correcting spellings, and formatting text data.
+   - Cleaning operations include handling missing values, text cleaning, language detection, and splitting multi-value fields.
+   - Text processing using NLTK and SpellChecker to refine and process description fields.
+
+3. **Trust Score Computation:**
+   - Computing trust scores for users using the PageRank algorithm based on their network of connections.
+   - Trust scores are recalculated by resetting initial values based on a subset of users.
+
+4. **Exploratory Data Analysis (EDA):**
+   - Analysis of user profiles to understand distributions of various attributes.
+   - Comparative analysis of 'scam' versus 'normal' profiles to identify distinguishing features.
+   - Meta-feature extraction from user descriptions for in-depth textual analysis.
+
+5. **Visualization and Insights:**
+   - Visual representations of data distributions and key attributes.
+   - Extracting insights from text data, including the identification of top words and meta-features.
+
 
 ## Requirements
 
-- Python 3.6 or higher
 - pandas
 - numpy
-- nltk
 - matplotlib
-- gensim
-
-Make sure to install all required libraries using `pip install -r requirements.txt` (if you have a `requirements.txt` file) 
-or manually install them using `pip install <library>`.
-
-## Usage
-
-### Step 1: Calculate Dissimilarity Scores
-
-Run the `dissimilarity_score.py` script first. It will process the user profiles to compute dissimilarity scores 
-and save the results in a JSON file.
-
-```sh
-python dissimilarity_score.py
-```
-
-### Step 2: Identify Trusted Profiles
-
-After calculating the dissimilarity scores, execute the `trusted_profile.py` script. It will use the scores 
-from the first script to flag trusted profiles and save them for further analysis.
-
-```sh
-python trusted_profile.py
-```
-
-### Step 3: Distinguish Naive & Expert Profiles
-
-Finally, use the `naive&expert.py` script to categorize the profiles into naive and expert groups. This script 
-will also generate visualizations and save them to disk.
-
-```sh
-python naive&expert.py
-```
-
-## Output
-
-The scripts will generate several output files, including:
-
-- `dissimilarity_scores.json` - JSON file with dissimilarity scores.
-- `trusted_profiles.csv` - CSV file listing trusted profiles.
-- `naive_set.csv` and `expert_set.csv` - CSV files containing the segregated naive and expert profile sets.
-- Various plots in PNG format visualizing the data analysis results.
-
-## Notes
-
-- Ensure that all scripts are in the same directory and that the input data files are correctly placed in this directory.
-- If any changes are made to the filenames or paths within the scripts, update the README accordingly.
+- networkx
+- nltk
+- spellchecker
+- asyncio
+- playwright
+- tqdm
+- langdetect
+- re
+- unicodedata
