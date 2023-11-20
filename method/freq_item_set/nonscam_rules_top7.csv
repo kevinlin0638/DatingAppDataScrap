@@ -1,0 +1,8 @@
+,antecedents,consequents,support
+207,"frozenset({'gender - male', 'sexual_orientation - straight'})",frozenset({'scam - 0'}),0.6162608012568735
+218,"frozenset({'sexual_orientation - straight', 'marital_status - single'})",frozenset({'scam - 0'}),0.5841516103692066
+223,"frozenset({'religion - christian', 'sexual_orientation - straight'})",frozenset({'scam - 0'}),0.48959151610369206
+17,frozenset({'children - no children'}),frozenset({'scam - 0'}),0.4130204241948154
+191,"frozenset({'gender - male', 'marital_status - single'})",frozenset({'scam - 0'}),0.41062450903377845
+24,frozenset({'ethnicity - hispanic'}),frozenset({'scam - 0'}),0.4076394344069128
+364,"frozenset({'gender - male', 'sexual_orientation - straight', 'marital_status - single'})",frozenset({'scam - 0'}),0.3943833464257659
