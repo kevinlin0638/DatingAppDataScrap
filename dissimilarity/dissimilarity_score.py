@@ -29,8 +29,8 @@ def pad_sequence(seq, max_len=100, padding_token='<PAD>'):
 all_profile['padded'] = all_profile['tokenized'].apply(pad_sequence, max_len=100)
 
 # Train the w2v model and save for future use
-# w2v_model = Word2Vec(sentences=all_profile['tokenized'], vector_size=100, window=5, min_count=1, workers=4)
-# w2v_model.save("word2vec_model.bin")
+w2v_model = Word2Vec(sentences=all_profile['tokenized'], vector_size=100, window=5, min_count=1, workers=4)
+w2v_model.save("word2vec_model.bin")
 
 # Load a pre-trained Word2Vec model
 w2v_model = Word2Vec.load("word2vec_model.bin")
@@ -62,8 +62,8 @@ for scam_index, scam_row in scammer_profiles.iterrows():
         if len(scammer_vector) == len(normal_vector):
             corr, _ = pearsonr(scammer_vector, normal_vector)
             scores.append((normal_index, corr))
-    scores.sort(key=lambda x: x[1], reverse=True)
-    pcc_results[scam_index] = scores[:10]
+    # scores.sort(key=lambda x: x[1], reverse=True)
+    # pcc_results[scam_index] = scores[:10]
 
 # Convert PCC results to a JSON-compatible format
 pcc_results_json = json.dumps({str(key): value for key, value in pcc_results.items()})

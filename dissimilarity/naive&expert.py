@@ -1,5 +1,6 @@
 import json
 import re
+import csv
 from collections import Counter
 
 import numpy as np
@@ -30,17 +31,26 @@ with open(PCC_RESULTS_FILE, 'r') as file:
     pcc_results = json.load(file)
 all_profile = pd.read_csv(ALL_PROFILE_FILE, index_col=0)
 
-# Split profiles into scammers and normals
+# Take scammers profiles
 scammer_profiles = all_profile[all_profile['scam'] == 1]
 
 # Calculate and sort average PCC scores for scam profiles
 average_pcc_scores = {idx: np.mean(scores) for idx, scores in pcc_results.items()}
 sorted_pcc = sorted(average_pcc_scores.items(), key=lambda item: item[1], reverse=True)
+# sort in descending order by pcc similarity score
+
+with open('sorted_pcc.csv', mode='w', newline='') as file:
+    writer = csv.writer(file)
+    # Write the header
+    writer.writerow(['Experiment', 'Average PCC Score'])
+    # Write the sorted scores
+    for experiment, score in sorted_pcc:
+        writer.writerow([experiment, score])
 
 # Identify top and bottom 10% scam profiles
 top_bottom_count = len(sorted_pcc) // 10
-naive_set = sorted_pcc[:top_bottom_count]
-expert_set = sorted_pcc[-top_bottom_count:]
+expert_set = sorted_pcc[:top_bottom_count]      # top 10% most similar
+naive_set = sorted_pcc[-top_bottom_count:]      # bottom 10% least similar
 
 # Save naive and expert sets to CSV
 pd.DataFrame(naive_set, columns=['index', 'avg_pcc']).to_csv(NAIVE_SET_FILE, index=False)
