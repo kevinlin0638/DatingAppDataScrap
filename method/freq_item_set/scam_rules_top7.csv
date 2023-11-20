@@ -1,0 +1,8 @@
+,antecedents,consequents,support
+52,"frozenset({'gender - male', 'age_bin - 51-60'})",frozenset({'scam - 1'}),0.28314643799472294
+27,frozenset({'marital_status - widowed'}),frozenset({'scam - 1'}),0.2691292875989446
+80,"frozenset({'gender - male', 'marital_status - widowed'})",frozenset({'scam - 1'}),0.24851583113456466
+63,"frozenset({'gender - female', 'ethnicity - white'})",frozenset({'scam - 1'}),0.24060026385224276
+39,"frozenset({'gender - female', 'age_bin - 31-40'})",frozenset({'scam - 1'}),0.2363126649076517
+84,"frozenset({'gender - female', 'age_bin - 31-40', 'marital_status - single'})",frozenset({'scam - 1'}),0.21025725593667546
+100,"frozenset({'gender - female', 'marital_status - single', 'ethnicity - white'})",frozenset({'scam - 1'}),0.2095976253298153
